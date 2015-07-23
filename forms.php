@@ -870,9 +870,9 @@ class buscadorUsuario extends moodleform {
 		global $CFG;
 		$usertype = $CFG->user;
 		$mform = & $this->_form;
-		$mform->addElement ( 'text', 'usuario', get_string ( 'uaiemail', 'local_reservasalas' ) . ': ' );
-		$mform->setType ( 'usuario', PARAM_TEXT );
-		$mform->addRule ( 'usuario', get_string ( 'uaiemail', 'local_reservasalas' ), 'required' );
+		$mform->addElement ( 'text', 'email', get_string ( 'uaiemail', 'local_reservasalas' ) . ': ' );
+		$mform->setType ( 'email', PARAM_TEXT );
+		$mform->addRule ( 'email', get_string ( 'uaiemail', 'local_reservasalas' ), 'required' );
 		$mform->addElement ( 'static', '', '', $usertype );
 		$mform->addElement ( 'textarea', 'comentario', get_string ( 'comment', 'local_reservasalas' ) . ': ', 'cols="40" rows="10"' );
 		
@@ -882,24 +882,31 @@ class buscadorUsuario extends moodleform {
 		global $DB;
 		$errors = array ();
 		
+	if(!empty($data['email'])){
 		if ($user = $DB->get_record ( 'user', array (
-				'username' => $data ['usuario'] 
+				'username' => $data ['email'] 
 		) )) {
 			if ($bloqueos = $DB->get_records ( 'reservasalas_bloqueados', array (
 					'alumno_id' => $user->id 
 			) )) {
 				foreach ( $bloqueos as $bloqueo ) {
 					if ($bloqueo->estado == 1) {
-						$errors ['usuario'] = '*' . get_string ( 'blockuser', 'local_reservasalas' );
+						$errors ['email'] = '*' . get_string ( 'blockuser', 'local_reservasalas' );
 					}
 				}
 			}
 		} else {
-			$errors ['usuario'] = '*' . get_string ( 'notuser', 'local_reservasalas' ) . ': ';
+			$errors ['email'] = '*' . get_string ( 'notuser', 'local_reservasalas' ) . ': ';
+		}
+		}
+		else{
+			$errors ['email'] = '*' .	get_string('empty', 'local_reservasalas'). ': ';
 		}
 		return $errors;
 	}
 }
+
+		
 // Formulario para desbloquear alumno
 class desbloquearAlumnoForm extends moodleform {
 	function definition() {
@@ -919,7 +926,7 @@ class desbloquearAlumnoForm extends moodleform {
 		$errors = array ();
 		$datenow = date ( 'Y-m-d' );
 		$bloqueado = false;
-		//Si ingrese algo
+	//Si ingrese algo
 		if(!empty($data['email'])){
 		//If the email exist in the DB
 			if ($email = $DB->get_record ( 'user', array (
@@ -949,6 +956,7 @@ class desbloquearAlumnoForm extends moodleform {
 	}
 }
 
+		
 class formReservarFecha extends moodleform {
 	// Add elements to form
 	public function definition() {

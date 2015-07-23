@@ -57,9 +57,7 @@ $desbloquearform = new desbloquearAlumnoForm();
 
 if($fromform = $desbloquearform->get_data()){
 	//Si el formualario fue enviado y el alumno existe y ademas esta bloqueado, lo desbloqueara.
-	//De lo contrario mostrata mensajes acordes al error ocurrido.
-
-	if($usuario = $DB->get_record('user',array('username'=>$fromform->usuario))){
+if($usuario = $DB->get_record('user',array('username'=>$fromform->usuario))){
 		$dateahora = date('Y-m-d');
 		if($bloqueo = $DB->get_record('reservasalas_bloqueados',array('alumno_id'=>$usuario->id,'estado'=>1))){//('reservasalas_bloqueados', array('alumno_id'=>$usuario->id));
 			$record = new stdClass();
@@ -73,7 +71,6 @@ if($fromform = $desbloquearform->get_data()){
 		}	
 	}
 	}
-
 //Se carga la página, ya sea el título, head y migas de pan.
 $o = '';
 $title = get_string('unblockstudent', 'local_reservasalas');

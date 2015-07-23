@@ -57,7 +57,6 @@ $PAGE->navbar->add(get_string('blockstudent', 'local_reservasalas'),'bloquear.ph
 $buscador = new buscadorUsuario(null);
 if($fromform = $buscador->get_data()){
 	//Bloquea al usuario en la base de datos
-	if($usuario = $DB->get_record('user',array('username'=>$fromform->usuario))){
 		$record = new stdClass();
 		$record->comentarios = $fromform->comentario;
 		$record->alumno_id = $usuario->id;
@@ -67,12 +66,10 @@ if($fromform = $buscador->get_data()){
 		
 		$DB->insert_record('reservasalas_bloqueados', $record);
 		$bloqueado = true;
-	}else{
-		print_error("error");
-	}
 }
 
 //Se carga la pagina, ya sea el titulo, head y migas de pan.
+
 
 $o = '';
 $title = get_string('blockstudent', 'local_reservasalas');
