@@ -301,7 +301,7 @@ $string['confirmyourbooking']="CONFIRMA TU RESERVA: Desde el pc de la sala de es
 $string['confirmationofbooking']="Confirmación de reserva";
 $string['gotomybookings']="Ir a mis reservas";
 $string['theuserdoesnotexist']="El usuario ingresado no existe";
-$string['dear']="Estimado ";
+$string['dear']="Estimado(a)";
 $string['reservescanceledforadminreasons']="Le informamos que alguna de sus reservas fue cancelada por razones administrativas, rogamos realizar una nueva reserva.";
 $string['bookingscanceled']="Reservas canceladas: ";
 $string['cancellationbookings']="Cancelación de reservas";
@@ -351,4 +351,22 @@ $string['searchuser'] = "Filtrar por email de usuarios";
 $string['filter'] = "Filtrar";
 $string['nouser'] = "No se encontraron usuarios";
 $string['blocked'] = 'Bloqueado';
+
+//search
+$string['userfilter'] = "Filtro de usuarios";
+$string['actions'] = "Acciones";
+
+//admin block
+$string['bloquear-comment'] = "Bloqueado por administrador";
+
+//default block reason for no confirm
+$string['no-confirm'] = "No confirmar";
+
+//reservar ui answers for failure
+$string['data-default-error'] = "No se pudo reservar la sala";
+$string['data-blocked-for-reason'] = "Bloqueado por: ";
+$string['data-max-daily-books'] = "Maximas reservas diarias";
+$string['data-max-weekly-books'] = "Maximas reservas semanales";
+$string['data-internal-error'] = "Error interno";
+$string['data-already-booked'] = "Sala ya esta reservada";
 ?>
